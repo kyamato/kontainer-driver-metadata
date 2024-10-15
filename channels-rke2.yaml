@@ -38,7 +38,7 @@ releases:
       cluster-dns:
         type: string
       service-cidr:
-        default: "10.43.0.0/16"
+        default: "10.43.0.0/16",
         type: string
       kube-controller-manager-arg:
         type: array
