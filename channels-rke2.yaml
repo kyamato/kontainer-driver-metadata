@@ -36,9 +36,9 @@ releases:
       kube-scheduler-arg:
         type: array
       cluster-dns:
-        type: string
+        type: "10.147.0.10"
       service-cidr:
-        type: string
+        type: "10.147.0.0/16"
       kube-controller-manager-arg:
         type: array
       kube-proxy-arg:
@@ -62,7 +62,7 @@ releases:
       audit-policy-file:
         type: string
       service-node-port-range:
-        type: string
+        type: "30000-32767"
       cluster-domain:
         type: string
       cni:
