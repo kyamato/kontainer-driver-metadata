@@ -34,8 +34,10 @@ releases:
       kube-scheduler-arg:
         type: array
       cluster-dns:
+        default: "10.147.0.10"
         type: string
       service-cidr:
+        default: "10.147.0.0/16"
         type: string
       kube-controller-manager-arg:
         type: array
@@ -56,6 +58,7 @@ releases:
         type: boolean
         default: false
       cluster-cidr:
+        default: "10.146.0.0/16"
         type: string
       audit-policy-file:
         type: string
