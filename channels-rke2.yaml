@@ -128,13 +128,8 @@ releases:
         type: boolean
         default: false
       kubelet-arg:
-        container-log-max-files:
-         type: string
-         default: "3"
-        container-log-max-size:
-         type: string
-         default: "2Mi"
-        type: array
+        default: "container-log-max-files=3"
+        type: string 
       kube-proxy-arg:
         type: array
       resolv-conf:
