@@ -129,8 +129,8 @@ releases:
         default: false
       kubelet-arg:
         defaults:
-        - --container-log-max-files=3
-        - --container-log-max-size=2Mi
+        - container-log-max-files=3
+        - container-log-max-size=2Mi
         type: array
       kube-proxy-arg:
         type: array
