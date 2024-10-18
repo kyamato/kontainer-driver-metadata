@@ -120,9 +120,12 @@ releases:
       flannel-conf:
         type: string
       kubelet-arg:
-        defaults:
-        - "container-log-max-files=3"
-        - "container-log-max-size=2Mi"
+        container-log-max-files:
+         type: string
+         default: "3"
+        container-log-max-size:
+         type: string
+         default: "2Mi"
         type: array
       kube-proxy-arg:
         type: array
