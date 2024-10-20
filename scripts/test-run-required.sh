@@ -22,7 +22,7 @@ fi
 # Only run check if Github build event is 'push' or 'pull_request'
 if [ "${GITHUB_EVENT_NAME}" = "push" ] || [ "${GITHUB_EVENT_NAME}" = "pull_request" ]; then
   # Check if the channels file contains changes to versions from the minor version
-  if [ "$(git --no-pager diff --no-color -G "^ - version:" $PREV_COMMIT_SHA -- "$CHANNELS_FILE" | grep -c -P "(^\+\s+- version: v1.$KDM_TEST_K8S_MINOR)")" -ne 0 ]; then
+  if [ "$(git --no-pager diff --no-color -G "^  - version:" $PREV_COMMIT_SHA -- "$CHANNELS_FILE" | grep -c -P "(^\+\s+- version: v1.$KDM_TEST_K8S_MINOR)")" -ne 0 ]; then
     exit 0
   fi
 fi
