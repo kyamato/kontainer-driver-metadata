@@ -1,0 +1,643 @@
+channels:
+  - name: default
+    latest: v1.22.17+k3s1
+appDefaults:
+  - appName: rancher
+    defaults:
+      - appVersion: '>= 2.6.0-0 < 2.6.5-0'
+        defaultVersion: '1.22.x'
+      - appVersion: '>= 2.6.5-0 < 2.6.7-0'
+        defaultVersion: '1.23.x'
+      - appVersion: '>= 2.6.7-0 < 2.7.2-0'
+        defaultVersion: '1.24.x'
+      - appVersion: '>= 2.7.2-0 < 2.7.5-0'
+        defaultVersion: '1.25.x'
+      - appVersion: '>= 2.7.5-0 < 2.7.100-0'
+        defaultVersion: '1.26.x'
+      - appVersion: '>= 2.8.0-0 < 2.8.3-0'
+        defaultVersion: '1.27.x'
+      - appVersion: '>= 2.8.3-0 < 2.8.100-0'
+        defaultVersion: '1.28.x'
+releases:
+  - version: v1.18.20+k3s1
+    minChannelServerVersion: v2.6.0-alpha1
+    maxChannelServerVersion: v2.6.99
+  - version: v1.19.16+k3s1
+    minChannelServerVersion: v2.6.0-alpha1
+    maxChannelServerVersion: v2.6.99
+  - version: v1.20.15+k3s1
+    minChannelServerVersion: v2.6.0-alpha1
+    maxChannelServerVersion: v2.6.99
+  - version: v1.21.4+k3s1
+    minChannelServerVersion: v2.6.0-alpha1
+    maxChannelServerVersion: v2.6.4
+    serverArgs: &serverArgs-v1
+      tls-san:
+        type: array
+      cluster-cidr:
+        type: string
+      service-cidr:
+        type: string
+      service-node-port-range:
+        type: string
+      cluster-dns:
+        type: string
+      cluster-domain:
+        type: string
+      flannel-backend:
+        type: enum
+        options:
+        - none
+        - vxlan
+        - ipsec
+        - host-gw
+        - wireguard
+      kube-apiserver-arg:
+        type: array
+      kube-scheduler-arg:
+        type: array
+      kube-controller-manager-arg:
+        type: array
+      kube-cloud-controller-manager-arg:
+        type: array
+      datastore-endpoint:
+        type: string
+      datastore-cafile:
+        type: string
+      datastore-certfile:
+        type: string
+      datastore-keyfile:
+        type: string
+      etcd-expose-metrics:
+        type: boolean
+        default: false
+      default-local-storage-path:
+        type: string
+      disable:
+        type: array
+        options:
+        - coredns
+        - servicelb
+        - traefik
+        - local-storage
+        - metrics-server
+      disable-scheduler:
+        type: boolean
+        default: false
+      disable-cloud-controller:
+        type: boolean
+        default: false
+      disable-kube-proxy:
+        type: boolean
+        default: false
+      disable-network-policy:
+        type: boolean
+        default: false
+      disable-apiserver:
+        type: boolean
+        default: false
+      disable-controller-manager:
+        type: boolean
+        default: false
+      disable-etcd:
+        type: boolean
+        default: false
+      secrets-encryption:
+        type: boolean
+        default: false
+    agentArgs: &agentArgs-v1
+      docker:
+        type: boolean
+        default: false
+      pause-image:
+        type: string
+      snapshotter:
+        type: string
+      flannel-iface:
+        type: string
+      flannel-conf:
+        type: string
+      kubelet-arg:
+        type: array
+      kube-proxy-arg:
+        type: array
+      protect-kernel-defaults:
+        type: boolean
+        default: false
+      selinux:
+        type: boolean
+        default: false
+      resolv-conf:
+        type: string
+      debug:
+        type: bool
+  - version: v1.21.5+k3s1
+    minChannelServerVersion: v2.6.0-alpha1
+    maxChannelServerVersion: v2.6.4
+    serverArgs: *serverArgs-v1
+    agentArgs: *agentArgs-v1
+  - version: v1.21.5+k3s2
+    minChannelServerVersion: v2.6.0-alpha1
+    maxChannelServerVersion: v2.6.4
+    serverArgs: *serverArgs-v1
+    agentArgs: *agentArgs-v1
+  - version: v1.21.6+k3s1
+    minChannelServerVersion: v2.6.0-alpha1
+    maxChannelServerVersion: v2.6.4
+    serverArgs: *serverArgs-v1
+    agentArgs: *agentArgs-v1
+  - version: v1.21.7+k3s1
+    minChannelServerVersion: v2.6.0-alpha1
+    maxChannelServerVersion: v2.6.4
+    serverArgs: &serverArgs-v2
+      <<: *serverArgs-v1
+      etcd-arg:
+        type: array
+    agentArgs: *agentArgs-v1
+  - version: v1.21.8+k3s2
+    minChannelServerVersion: v2.6.0-alpha1
+    maxChannelServerVersion: v2.6.4
+    serverArgs: *serverArgs-v2
+    agentArgs: *agentArgs-v1
+  - version: v1.21.9+k3s1
+    minChannelServerVersion: v2.6.0-alpha1
+    maxChannelServerVersion: v2.6.4
+    serverArgs: *serverArgs-v2
+    agentArgs: &agentArgs-v2
+      <<: *agentArgs-v1
+      system-default-registry:
+        type: string
+  - version: v1.21.10+k3s1
+    minChannelServerVersion: v2.6.3-alpha1
+    maxChannelServerVersion: v2.6.4
+    serverArgs: *serverArgs-v2
+    agentArgs: *agentArgs-v2
+  # v1.21.11+k3s1 was never released through KDM
+  - version: v1.21.12+k3s1
+    minChannelServerVersion: v2.6.3-alpha1
+    maxChannelServerVersion: v2.6.4
+    serverArgs: *serverArgs-v2
+    agentArgs: *agentArgs-v2
+  - version: v1.21.13+k3s1
+    minChannelServerVersion: v2.6.3-alpha1
+    maxChannelServerVersion: v2.6.4
+    serverArgs: *serverArgs-v2
+    agentArgs: *agentArgs-v2
+  - version: v1.21.14+k3s1
+    minChannelServerVersion: v2.6.3-alpha1
+    maxChannelServerVersion: v2.6.4
+    serverArgs: *serverArgs-v2
+    agentArgs: *agentArgs-v2
+    featureVersions: &featureVersions-v1
+      encryption-key-rotation: "2.0.0"
+  - version: v1.22.4+k3s1
+    minChannelServerVersion: v2.6.3-alpha1
+    maxChannelServerVersion: v2.6.99
+    serverArgs: *serverArgs-v2
+    agentArgs: *agentArgs-v1
+  - version: v1.22.5+k3s2
+    minChannelServerVersion: v2.6.3-alpha1
+    maxChannelServerVersion: v2.6.99
+    serverArgs: *serverArgs-v2
+    agentArgs: *agentArgs-v1
+  - version: v1.22.6+k3s1
+    minChannelServerVersion: v2.6.3-alpha1
+    maxChannelServerVersion: v2.6.99
+    serverArgs: *serverArgs-v2
+    agentArgs: *agentArgs-v2
+  - version: v1.22.7+k3s1
+    minChannelServerVersion: v2.6.3-alpha1
+    maxChannelServerVersion: v2.6.99
+    serverArgs: *serverArgs-v2
+    agentArgs: *agentArgs-v2
+  # v1.22.8+k3s1 was never released through KDM
+  - version: v1.22.9+k3s1
+    minChannelServerVersion: v2.6.3-alpha1
+    maxChannelServerVersion: v2.6.99
+    serverArgs: *serverArgs-v2
+    agentArgs: *agentArgs-v2
+  - version: v1.22.10+k3s1
+    minChannelServerVersion: v2.6.3-alpha1
+    maxChannelServerVersion: v2.6.99
+    serverArgs: &serverArgs-v3
+      <<: *serverArgs-v2
+      egress-selector-mode:
+        type: string
+    agentArgs: *agentArgs-v2
+  # v1.22.11+k3s1 was never released through KDM
+  - version: v1.22.11+k3s2
+    minChannelServerVersion: v2.6.3-alpha1
+    maxChannelServerVersion: v2.6.99
+    serverArgs: *serverArgs-v3
+    agentArgs: *agentArgs-v2
+    featureVersions: *featureVersions-v1
+  - version: v1.22.13+k3s1
+    minChannelServerVersion: v2.6.3-alpha1
+    maxChannelServerVersion: v2.6.99
+    serverArgs: *serverArgs-v3
+    agentArgs: *agentArgs-v2
+    featureVersions: *featureVersions-v1
+  # v1.22.14+k3s1 was never released
+  - version: v1.22.15+k3s1
+    minChannelServerVersion: v2.6.3-alpha1
+    maxChannelServerVersion: v2.6.99
+    serverArgs: *serverArgs-v3
+    agentArgs: *agentArgs-v2
+    featureVersions: *featureVersions-v1
+  - version: v1.22.16+k3s1
+    minChannelServerVersion: v2.6.3-alpha1
+    maxChannelServerVersion: v2.6.99
+    serverArgs: *serverArgs-v3
+    agentArgs: *agentArgs-v2
+    featureVersions: *featureVersions-v1
+  - version: v1.22.17+k3s1
+    minChannelServerVersion: v2.6.3-alpha1
+    maxChannelServerVersion: v2.6.99
+    serverArgs: *serverArgs-v3
+    agentArgs: *agentArgs-v2
+    featureVersions: *featureVersions-v1
+  - version: v1.23.4+k3s1
+    minChannelServerVersion: v2.6.4-alpha1
+    maxChannelServerVersion: v2.6.99
+    serverArgs: *serverArgs-v3
+    agentArgs: *agentArgs-v2
+  # v1.23.5+k3s1 was never released through KDM
+  - version: v1.23.6+k3s1
+    minChannelServerVersion: v2.6.4-alpha1
+    maxChannelServerVersion: v2.6.99
+    serverArgs: &serverArgs-v4
+      <<: *serverArgs-v3
+      flannel-backend:
+        type: enum
+        options:
+        - none
+        - vxlan
+        - ipsec
+        - host-gw
+        - wireguard
+        - wireguard-native
+    agentArgs: *agentArgs-v2
+  - version: v1.23.7+k3s1
+    minChannelServerVersion: v2.6.4-alpha1
+    maxChannelServerVersion: v2.6.99
+    serverArgs: *serverArgs-v4
+    agentArgs: *agentArgs-v2
+  #  v1.23.8+k3s1 was never released through KDM
+  - version: v1.23.8+k3s2
+    minChannelServerVersion: v2.6.4-alpha1
+    maxChannelServerVersion: v2.6.99
+    serverArgs: *serverArgs-v4
+    agentArgs: *agentArgs-v2
+    featureVersions: *featureVersions-v1
+  - version: v1.23.10+k3s1
+    minChannelServerVersion: v2.6.4-alpha1
+    maxChannelServerVersion: v2.7.99
+    serverArgs: *serverArgs-v4
+    agentArgs: *agentArgs-v2
+    featureVersions: *featureVersions-v1
+  #  v1.23.11+k3s1 was never released
+  #  v1.23.12+k3s1 was never released through KDM
+  - version: v1.23.13+k3s1
+    minChannelServerVersion: v2.6.4-alpha1
+    maxChannelServerVersion: v2.7.99
+    serverArgs: *serverArgs-v4
+    agentArgs: *agentArgs-v2
+    featureVersions: *featureVersions-v1
+  - version: v1.23.14+k3s1
+    minChannelServerVersion: v2.6.4-alpha1
+    maxChannelServerVersion: v2.7.99
+    serverArgs: *serverArgs-v4
+    agentArgs: *agentArgs-v2
+    featureVersions: *featureVersions-v1
+  - version: v1.23.15+k3s1
+    minChannelServerVersion: v2.6.4-alpha1
+    maxChannelServerVersion: v2.7.99
+    serverArgs: *serverArgs-v4
+    agentArgs: *agentArgs-v2
+    featureVersions: *featureVersions-v1
+  - version: v1.23.16+k3s1
+    minChannelServerVersion: v2.6.4-alpha1
+    maxChannelServerVersion: v2.7.99
+    serverArgs: *serverArgs-v4
+    agentArgs: *agentArgs-v2
+    featureVersions: *featureVersions-v1
+  - version: v1.23.17+k3s1
+    minChannelServerVersion: v2.6.4-alpha1
+    maxChannelServerVersion: v2.7.99
+    serverArgs: *serverArgs-v4
+    agentArgs: *agentArgs-v2
+    featureVersions: *featureVersions-v1
+  - version: v1.24.2+k3s2
+    minChannelServerVersion: v2.6.7-alpha1
+    maxChannelServerVersion: v2.6.99
+    serverArgs: *serverArgs-v4
+    agentArgs: *agentArgs-v2
+    featureVersions: *featureVersions-v1
+  - version: v1.24.4+k3s1
+    minChannelServerVersion: v2.6.7-alpha1
+    maxChannelServerVersion: v2.7.99
+    serverArgs: *serverArgs-v4
+    agentArgs: *agentArgs-v2
+    featureVersions: *featureVersions-v1
+  #  v1.24.5+k3s1 was never released
+  #  v1.24.6+k3s1 was never released through KDM
+  - version: v1.24.7+k3s1
+    minChannelServerVersion: v2.6.7-alpha1
+    maxChannelServerVersion: v2.7.99
+    serverArgs: *serverArgs-v4
+    agentArgs: *agentArgs-v2
+    featureVersions: *featureVersions-v1
+  - version: v1.24.8+k3s1
+    minChannelServerVersion: v2.6.7-alpha1
+    maxChannelServerVersion: v2.7.99
+    serverArgs: *serverArgs-v4
+    agentArgs: *agentArgs-v2
+    featureVersions: *featureVersions-v1
+  - version: v1.24.9+k3s2
+    minChannelServerVersion: v2.6.7-alpha1
+    maxChannelServerVersion: v2.7.99
+    serverArgs: *serverArgs-v4
+    agentArgs: *agentArgs-v2
+    featureVersions: *featureVersions-v1
+  - version: v1.24.10+k3s1
+    minChannelServerVersion: v2.6.7-alpha1
+    maxChannelServerVersion: v2.7.99
+    serverArgs: *serverArgs-v4
+    agentArgs: *agentArgs-v2
+    featureVersions: *featureVersions-v1
+  - version: v1.24.11+k3s1
+    minChannelServerVersion: v2.6.7-alpha1
+    maxChannelServerVersion: v2.7.99
+    serverArgs: *serverArgs-v4
+    agentArgs: *agentArgs-v2
+    featureVersions: *featureVersions-v1
+  - version: v1.24.13+k3s1
+    minChannelServerVersion: v2.6.7-alpha1
+    maxChannelServerVersion: v2.7.99
+    serverArgs: *serverArgs-v4
+    agentArgs: *agentArgs-v2
+    featureVersions: *featureVersions-v1
+  - version: v1.24.14+k3s1
+    minChannelServerVersion: v2.6.7-alpha1
+    maxChannelServerVersion: v2.7.99
+    serverArgs: *serverArgs-v4
+    agentArgs: *agentArgs-v2
+    featureVersions: *featureVersions-v1
+  - version: v1.24.15+k3s1
+    minChannelServerVersion: v2.6.7-alpha1
+    maxChannelServerVersion: v2.7.99
+    serverArgs: *serverArgs-v4
+    agentArgs: *agentArgs-v2
+    featureVersions: *featureVersions-v1
+  - version: v1.24.16+k3s1
+    minChannelServerVersion: v2.6.7-alpha1
+    maxChannelServerVersion: v2.7.99
+    serverArgs: &serverArgs-v5
+      <<: *serverArgs-v4
+      helm-job-image:
+        type: string
+    agentArgs: *agentArgs-v2
+    featureVersions: *featureVersions-v1
+  - version: v1.24.17+k3s1
+    minChannelServerVersion: v2.6.7-alpha1
+    maxChannelServerVersion: v2.7.99
+    serverArgs: &serverArgs-v6
+      <<: *serverArgs-v5
+      tls-san-security:
+          type: boolean
+    agentArgs: *agentArgs-v2
+    featureVersions: *featureVersions-v1
+  # v1.25.7 will be the first version released in the v1.25.x line.
+  - version: v1.25.7+k3s1
+    minChannelServerVersion: v2.7.2-alpha1
+    maxChannelServerVersion: v2.7.99
+    serverArgs: *serverArgs-v4
+    agentArgs: *agentArgs-v2
+    featureVersions: *featureVersions-v1
+  - version: v1.25.9+k3s1
+    minChannelServerVersion: v2.7.2-alpha1
+    maxChannelServerVersion: v2.7.99
+    serverArgs: *serverArgs-v4
+    agentArgs: *agentArgs-v2
+    featureVersions: *featureVersions-v1
+  - version: v1.25.10+k3s1
+    minChannelServerVersion: v2.7.2-alpha1
+    maxChannelServerVersion: v2.7.99
+    serverArgs: *serverArgs-v4
+    agentArgs: *agentArgs-v2
+    featureVersions: *featureVersions-v1
+  - version: v1.25.11+k3s1
+    minChannelServerVersion: v2.7.2-alpha1
+    maxChannelServerVersion: v2.7.99
+    serverArgs: *serverArgs-v4
+    agentArgs: &agentArgs-v3
+      <<: *agentArgs-v2
+      vpn-auth:
+        type: string
+      vpn-auth-file:
+        type: string
+    featureVersions: *featureVersions-v1
+  - version: v1.25.12+k3s1
+    minChannelServerVersion: v2.7.2-alpha1
+    maxChannelServerVersion: v2.7.99
+    serverArgs: *serverArgs-v5
+    agentArgs: *agentArgs-v3
+    featureVersions: *featureVersions-v1
+  - version: v1.25.13+k3s1
+    minChannelServerVersion: v2.7.2-alpha1
+    maxChannelServerVersion: v2.8.99
+    serverArgs: *serverArgs-v6
+    agentArgs: *agentArgs-v3
+    featureVersions: *featureVersions-v1
+  - version: v1.25.15+k3s2
+    minChannelServerVersion: v2.7.2-alpha1
+    maxChannelServerVersion: v2.8.99
+    serverArgs: *serverArgs-v6
+    agentArgs: *agentArgs-v3
+    featureVersions: *featureVersions-v1
+  - version: v1.25.16+k3s4
+    minChannelServerVersion: v2.7.2-alpha1
+    maxChannelServerVersion: v2.8.99
+    serverArgs: *serverArgs-v6
+    agentArgs: &agentArgs-v4
+      <<: *agentArgs-v3
+      disable-apiserver-lb:
+        type: boolean
+    featureVersions: *featureVersions-v1
+  - version: v1.26.5+k3s1
+    minChannelServerVersion: v2.7.5-alpha1
+    maxChannelServerVersion: v2.7.99
+    serverArgs: *serverArgs-v4
+    agentArgs: *agentArgs-v2
+    featureVersions: *featureVersions-v1
+  - version: v1.26.6+k3s1
+    minChannelServerVersion: v2.7.5-alpha1
+    maxChannelServerVersion: v2.7.99
+    serverArgs: *serverArgs-v4
+    agentArgs: *agentArgs-v3
+    featureVersions: *featureVersions-v1
+  - version: v1.26.7+k3s1
+    minChannelServerVersion: v2.7.5-alpha1
+    maxChannelServerVersion: v2.7.99
+    serverArgs: *serverArgs-v5
+    agentArgs: *agentArgs-v3
+    featureVersions: *featureVersions-v1
+  - version: v1.26.8+k3s1
+    minChannelServerVersion: v2.7.5-alpha1
+    maxChannelServerVersion: v2.8.99
+    serverArgs: *serverArgs-v6
+    agentArgs: *agentArgs-v3
+    featureVersions: *featureVersions-v1
+  - version: v1.26.10+k3s2
+    minChannelServerVersion: v2.7.5-alpha1
+    maxChannelServerVersion: v2.8.99
+    serverArgs: *serverArgs-v6
+    agentArgs: *agentArgs-v3
+    featureVersions: *featureVersions-v1
+  - version: v1.26.11+k3s2
+    minChannelServerVersion: v2.7.5-alpha1
+    maxChannelServerVersion: v2.8.99
+    serverArgs: *serverArgs-v6
+    agentArgs: *agentArgs-v4
+    featureVersions: *featureVersions-v1
+  - version: v1.26.13+k3s2
+    minChannelServerVersion: v2.7.5-alpha1
+    maxChannelServerVersion: v2.8.99
+    serverArgs: &serverArgs-v7
+      <<: *serverArgs-v6
+      embedded-registry:
+        type: boolean
+    agentArgs: &agentArgs-v5
+      <<: *agentArgs-v4
+      default-runtime:
+        type: string
+      disable-default-registry-endpoint:
+        type: boolean
+    featureVersions: *featureVersions-v1
+  - version: v1.26.14+k3s1
+    minChannelServerVersion: v2.7.5-alpha1
+    maxChannelServerVersion: v2.8.99
+    serverArgs: *serverArgs-v7
+    agentArgs: *agentArgs-v5
+    featureVersions: *featureVersions-v1
+  - version: v1.26.15+k3s1
+    minChannelServerVersion: v2.7.5-alpha1
+    maxChannelServerVersion: v2.8.99
+    serverArgs: *serverArgs-v7
+    agentArgs: *agentArgs-v5
+    featureVersions: *featureVersions-v1
+  - version: v1.27.5+k3s1
+    minChannelServerVersion: v2.8.0-alpha1
+    maxChannelServerVersion: v2.8.99
+    serverArgs: *serverArgs-v6
+    agentArgs: *agentArgs-v3
+    featureVersions: *featureVersions-v1
+  - version: v1.27.7+k3s2
+    minChannelServerVersion: v2.8.0-alpha1
+    maxChannelServerVersion: v2.8.99
+    serverArgs: *serverArgs-v6
+    agentArgs: *agentArgs-v3
+    featureVersions: *featureVersions-v1
+  - version: v1.27.8+k3s2
+    minChannelServerVersion: v2.8.0-alpha1
+    maxChannelServerVersion: v2.8.99
+    serverArgs: *serverArgs-v6
+    agentArgs: *agentArgs-v4
+    featureVersions: *featureVersions-v1
+  - version: v1.27.10+k3s2
+    minChannelServerVersion: v2.8.0-alpha1
+    maxChannelServerVersion: v2.8.99
+    serverArgs: *serverArgs-v7
+    agentArgs: *agentArgs-v5
+    featureVersions: *featureVersions-v1
+  - version: v1.27.11+k3s1
+    minChannelServerVersion: v2.8.0-alpha1
+    maxChannelServerVersion: v2.8.99
+    serverArgs: *serverArgs-v7
+    agentArgs: *agentArgs-v5
+    featureVersions: *featureVersions-v1
+  - version: v1.27.12+k3s1
+    minChannelServerVersion: v2.8.0-alpha1
+    maxChannelServerVersion: v2.8.99
+    serverArgs: *serverArgs-v7
+    agentArgs: *agentArgs-v5
+    featureVersions: *featureVersions-v1
+  - version: v1.27.13+k3s1
+    minChannelServerVersion: v2.8.0-alpha1
+    maxChannelServerVersion: v2.8.99
+    serverArgs: &serverArgs-v8
+      <<: *serverArgs-v7
+      kine-tls:
+        type: boolean
+    agentArgs: *agentArgs-v5
+    featureVersions: *featureVersions-v1
+  - version: v1.27.14+k3s1
+    minChannelServerVersion: v2.8.0-alpha1
+    maxChannelServerVersion: v2.8.99
+    serverArgs: *serverArgs-v8
+    agentArgs: *agentArgs-v5
+    featureVersions: *featureVersions-v1
+  - version: v1.27.15+k3s2
+    minChannelServerVersion: v2.8.0-alpha1
+    maxChannelServerVersion: v2.8.99
+    serverArgs: &serverArgs-v9
+      <<: *serverArgs-v8
+      supervisor-metrics:
+        type: boolean
+      write-kubeconfig-group:
+        type: string
+    agentArgs: &agentArgs-v6
+      <<: *agentArgs-v5
+      enable-pprof:
+        type: boolean
+      bind-address:
+        type: string
+    featureVersions: *featureVersions-v1
+  - version: v1.27.16+k3s1
+    minChannelServerVersion: v2.8.0-alpha1
+    maxChannelServerVersion: v2.8.99
+    serverArgs: *serverArgs-v9
+    agentArgs: *agentArgs-v6
+    featureVersions: *featureVersions-v1
+  - version: v1.28.8+k3s1
+    minChannelServerVersion: v2.8.3-alpha1
+    maxChannelServerVersion: v2.8.99
+    serverArgs: *serverArgs-v7
+    agentArgs: *agentArgs-v5
+    featureVersions: *featureVersions-v1
+  - version: v1.28.9+k3s1
+    minChannelServerVersion: v2.8.3-alpha1
+    maxChannelServerVersion: v2.8.99
+    serverArgs: *serverArgs-v8
+    agentArgs: *agentArgs-v5
+    featureVersions: *featureVersions-v1
+  - version: v1.28.10+k3s1
+    minChannelServerVersion: v2.8.3-alpha1
+    maxChannelServerVersion: v2.8.99
+    serverArgs: *serverArgs-v8
+    agentArgs: *agentArgs-v5
+    featureVersions: *featureVersions-v1
+  - version: v1.28.11+k3s2
+    minChannelServerVersion: v2.8.3-alpha1
+    maxChannelServerVersion: v2.8.99
+    serverArgs: *serverArgs-v9
+    agentArgs: *agentArgs-v6
+    featureVersions: *featureVersions-v1
+  - version: v1.28.12+k3s1
+    minChannelServerVersion: v2.8.3-alpha1
+    maxChannelServerVersion: v2.8.99
+    serverArgs: *serverArgs-v9
+    agentArgs: *agentArgs-v6
+    featureVersions: *featureVersions-v1
+  - version: v1.28.13+k3s1
+    minChannelServerVersion: v2.8.3-alpha1
+    maxChannelServerVersion: v2.8.99
+    serverArgs: *serverArgs-v9
+    agentArgs: *agentArgs-v6
+    featureVersions: *featureVersions-v1
+  - version: v1.28.14+k3s1
+    minChannelServerVersion: v2.8.3-alpha1
+    maxChannelServerVersion: v2.8.99
+    serverArgs: *serverArgs-v9
+    agentArgs: *agentArgs-v6
+    featureVersions: *featureVersions-v1

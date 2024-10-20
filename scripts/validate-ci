@@ -1,0 +1,27 @@
+#!/bin/bash
+set -e
+
+cd $(dirname $0)/..
+
+echo Running go mod tidy
+go mod tidy
+
+echo Running go mod verify
+go mod verify
+
+echo Running go test
+go test ./pkg/...
+
+echo Running go generate
+go generate
+
+source ./scripts/version
+
+if [ -n "$DIRTY" ]; then
+    echo Git is dirty
+    git status
+    exit 1
+fi
+
+echo Checking if released versions are not changed
+go run ./pkg/validation/validation.go release-v2.8
