@@ -34,12 +34,17 @@ releases:
       kube-scheduler-arg:
         type: array
       cluster-dns:
+        default: "10.147.0.10"
         type: string
       service-cidr:
+        default: "10.147.0.0/16"
         type: string
       kube-controller-manager-arg:
         type: array
       kube-proxy-arg:
+        default:
+        - '--container-log-max-files=2'
+        - '--container-log-max-size=25Mi'
         type: array
       tls-san:
         type: array
@@ -56,10 +61,12 @@ releases:
         type: boolean
         default: false
       cluster-cidr:
+        default: "10.146.0.0/16"
         type: string
       audit-policy-file:
         type: string
       service-node-port-range:
+        default: "30000-32767"
         type: string
       cluster-domain:
         type: string
