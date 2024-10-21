@@ -151,7 +151,7 @@ func getImages(distro string, versions []interface{}) (all []string, err error) 
 			temp, _ := version.(map[string]interface{})
 			v, _ := temp["version"].(string)
 			for _, os := range []string{linux, window} {
-				url, _ := urls[distro][os]
+				url := urls[distro][os]
 				if url != "" {
 					images, err := getImagesFromURL(fmt.Sprintf(url, v))
 					if err != nil {
