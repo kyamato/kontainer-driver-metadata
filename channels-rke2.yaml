@@ -42,6 +42,7 @@ releases:
       kube-controller-manager-arg:
         type: array
       kube-proxy-arg:
+        default:
         - '--container-log-max-files=2'
         - '--container-log-max-size=25Mi'
         type: array
@@ -130,12 +131,9 @@ releases:
         type: boolean
         default: false
       kubelet-arg:
-        default:
-        - '--feature-gates=TopologyAwareHints=true'
         type: array
       kube-proxy-arg:
         default:
-        - '--feature-gates=TopologyAwareHints=true'
         - '--container-log-max-files=2'
         - '--container-log-max-size=25Mi'
         type: array
