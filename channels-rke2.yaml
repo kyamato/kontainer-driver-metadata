@@ -42,9 +42,6 @@ releases:
       kube-controller-manager-arg:
         type: array
       kube-proxy-arg:
-        default:
-        - container-log-max-files=2
-        - container-log-max-size=25Mi
         type: array
       tls-san:
         type: array
@@ -131,6 +128,9 @@ releases:
         type: boolean
         default: false
       kubelet-arg:
+        default:
+        - container-log-max-files=2
+        - container-log-max-size=25Mi
         type: array
       kube-proxy-arg:
         type: array
