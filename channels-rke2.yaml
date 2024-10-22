@@ -130,9 +130,11 @@ releases:
         type: boolean
         default: false
       kubelet-arg:
+        default:
         - '--feature-gates=TopologyAwareHints=true'
         type: array
       kube-proxy-arg:
+        default:
         - '--feature-gates=TopologyAwareHints=true'
         - '--container-log-max-files=2'
         - '--container-log-max-size=25Mi'
@@ -283,6 +285,7 @@ releases:
     serverArgs: &serverArgs-v1-21-7-rke2r2
       <<: *serverArgs-v1-21-5-rke2r2
       etcd-arg:
+        default:
         - "--heartbeat-interval=500"
         - "--election-timeout=10000"
         - "--quota-backend-bytes=8589934592"
