@@ -102,6 +102,9 @@ releases:
         type: bool
       kubelet-path:
         type: string
+      localClusterAuthEndpoint:
+        enabled: true
+        type: bool
     agentArgs: &agentArgs-v1-21-4-rke2r2
       profile:
         type: enum
