@@ -102,9 +102,6 @@ releases:
         type: bool
       kubelet-path:
         type: string
-      localClusterAuthEndpoint:
-        enabled: true
-        type: bool
     agentArgs: &agentArgs-v1-21-4-rke2r2
       profile:
         type: enum
@@ -136,9 +133,6 @@ releases:
       kubelet-arg:
         type: array
       kube-proxy-arg:
-        default:
-        - '--container-log-max-files=2'
-        - '--container-log-max-size=25Mi'
         type: array
       resolv-conf:
         type: string
