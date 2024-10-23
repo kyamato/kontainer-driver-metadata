@@ -3,7 +3,7 @@ package rke
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+//	"io/ioutil"
 	"os"
 	"strings"
 
@@ -179,8 +179,8 @@ func validateTemplateMatch() {
 }
 
 func readFile(input string, data map[string]interface{}) error {
-	bytes, err := ioutil.ReadFile(input)
-//	bytes, err := os.ReadFile(input)
+//	bytes, err := ioutil.ReadFile(input)
+	bytes, err := os.ReadFile(input)
 	if err != nil {
 		return err
 	}
