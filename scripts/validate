@@ -6,6 +6,7 @@ cd $(dirname $0)/..
 echo Running validation
 
 PACKAGES="$(go list -tags "$BUILDTAGS" ./...)"
+echo BUILDTAGS=${BUILDTAGS} PACKAGES=${PACKAGES}
 
 if ! command -v golangci-lint; then
     echo Skipping validation: no golangci-lint available
@@ -17,3 +18,4 @@ golangci-lint run
 
 echo Running: go fmt
 test -z "$(go fmt ${PACKAGES} | tee /dev/stderr)"
+echo Exit: go fmt 
